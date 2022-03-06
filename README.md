@@ -134,5 +134,102 @@
 | whatis [command] | Вывод описания команды или команд подпадающих под шаблон [command] |
 | apropos [search-pattern] | Поиск по базе данных команд по шаблону |
 
+***BASH*** – название является аббревиатурой от «Bourne-again shell», отсылкой к более ранней оболочке Bourne и каламбуром термина «рожденный заново», самый популярный командный интерпретатор в юниксоподобных системах, в особенности в GNU/Linux.   
+Bash можно установить с помощью инструмента управления пакетами, такого как Homebrew
+
+-[Использование оболочки zsh в качестве стандартной оболочки на компьютере Mac ](https://support.apple.com/ru-ru/HT208050) 
+-[Ресурс по #zsh](https://wiki.archlinux.org/title/Zsh_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9))
+
+---
+### Using Z Shell  #zsh on Macs with the Learn Enough Tutorials
+ https://news.learnenough.com/macos-bash-zshell 
+ Как сменить оболочки с `zsh` on `bash`? How to change shells
+The main technique is to use the chsh program, which stands for “change shell”. Note that this procedure is entirely reversible (as described below), so there is no need to be concerned about damaging your system.
+The first step is to confirm the identity of your current shell program using the echo command
+
+```bash
+$ echo $SHELL
+  /bin/bash
+```
+This prints out the `$SHELL` environment variable, which in most cases prints out the value of the current shell—in this case, Bash. (In rare cases, `$SHELL` may differ from the current shell, but the procedure below will still correctly change from one shell to another.) To change to `Zsh`, simply follow Apple’s suggestion from Listing 1 and run chsh (“change shell”) with the ` -s ` (“newshell”) option:
+
+```bash
+  $ chsh -s /bin/zsh
+```
+You’ll almost certainly be prompted to type your system password at this point, which you should do. Then completely exit your shell program using **Command-Q** and relaunch it.
+Once you’ve followed the steps above, you’ll be running Z shell instead of Bash, as you can confirm with echo:
+
+```bash
+$ echo $SHELL
+  /bin/zsh
+```
+If you ever want to switch back, simply use the same `chsh` command with bash in place of zsh:
+
+```bash
+  $ chsh -s /bin/bash
+```
+As with the previous case, type in your password and then restart your terminal program. The result will be a restoration of your previous settings:
+
+```bash
+$ echo $SHELL
+  /bin/bash
+```
+
+---
+### Отличия оболочек
+Более существенное отличие связано с поведением по умолчанию. Системы Bash обычно называют потенциально опасные команды `rm` (удалить), `mv` (переместить) и `cp` (копировать) версиями, использующими параметр `-i`, который требует подтверждения для любых возможных удалений:
+При удалении требуется подтверждение
+
+#### Bash example.
+
+```bash
+$ touch foo
+$ rm foo
+remove foo? n
+$ ls foo
+foo
+```
+
+`rm` alone is sufficient. Его можно переопределить с помощью `-f` (force) option:
+
+#### Bash example continued.
+
+```bash
+$ rm -f foo
+$ ls foo
+ls: foo: No such file or directory
+```
+
+The same patterns apply to the wildcard operator ` * `:
+
+#### Bash example.
+
+```bash
+$ touch foo.baz
+$ touch bar.baz
+$ rm *.baz
+remove bar.baz? n
+remove foo.baz? n
+$ rm -f *.baz
+$ ls *.baz
+ls: *.baz: No such file or directory
+```
+
+Для использования таких команд в zsh нужно внести изменения
+To ensure that this behavior is the same in Zsh, two changes are needed. First, we need to add the corresponding aliases, which fortunately follow the same syntax as Bash 
+
+#### Avoid accidental deletions
+
+```bash
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+```
+[Подробнее в статье есть гайды](https://news.learnenough.com/macos-bash-zshell)
+
+
+
+
+
 
 
