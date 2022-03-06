@@ -229,6 +229,20 @@ alias cp='cp -i'
 ```
 [Подробнее в статье есть гайды](https://news.learnenough.com/macos-bash-zshell)
 
+[Learn Enough Command Line to Be Dangerous](https://www.learnenough.com/command-line-tutorial/basics) 
+
+Графический интерфейс пользователя (GUI) может значительно упростить использование компьютера, но во многих случаях наиболее мощным и гибким способом взаимодействия с компьютером является интерфейс командной строки (CLI).
+Возможно нужно будет поставить [iTerm2](https://iterm2.com/features.html)  
+
+Тильда ` ~ ` указывает на домашний каталог, в котором вы находитесь.
+Забавно, что причина, по которой символ тильды используется для домашнего каталога, заключается просто в том, что клавиша “Home” была такой же, как клавиша для создания `~` на некоторых ранних клавиатурах
+
+<img alt="image" src="images/1.png"> </img> 
+
+The **prompt** (to “prompt – побудить к действию, подсказка” the user to do something) followed by a **command** (as in “give the computer a command”), an **option** (as in “choose a different option”), and an **argument** (as in the “argument of a function” in mathematics).  prompt выдается терминалом автоматически, и вам не нужно его набирать
+
+<img alt="image" src="images/2.png"> </img> 
+
 
 
 
