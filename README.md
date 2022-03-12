@@ -142,10 +142,11 @@ Bash можно установить с помощью инструмента у
 - [Ресурс по #zsh](https://wiki.archlinux.org/title/Zsh_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9))
 
 ---
+---
 ### Using Z Shell  #zsh on Macs with the Learn Enough Tutorials
  https://news.learnenough.com/macos-bash-zshell 
 
- Как сменить оболочки с `zsh` on `bash`? How to change shells
+Как сменить оболочки с `zsh` on `bash`? How to change shells
 The main technique is to use the chsh program, which stands for “change shell”. Note that this procedure is entirely reversible (as described below), so there is no need to be concerned about damaging your system.
 The first step is to confirm the identity of your current shell program using the echo command
 
@@ -229,6 +230,7 @@ alias cp='cp -i'
 ```
 [Подробнее в статье есть гайды](https://news.learnenough.com/macos-bash-zshell)
 
+--- 
 [Learn Enough Command Line to Be Dangerous](https://www.learnenough.com/command-line-tutorial/basics) 
 
 Графический интерфейс пользователя (GUI) может значительно упростить использование компьютера, но во многих случаях наиболее мощным и гибким способом взаимодействия с компьютером является интерфейс командной строки (CLI).
