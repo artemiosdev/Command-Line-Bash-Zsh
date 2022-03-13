@@ -230,7 +230,7 @@ alias cp='cp -i'
 ```
 [Подробнее в статье есть гайды](https://news.learnenough.com/macos-bash-zshell)
 
---- 
+---
 [Learn Enough Command Line to Be Dangerous](https://www.learnenough.com/command-line-tutorial/basics) 
 
 Графический интерфейс пользователя (GUI) может значительно упростить использование компьютера, но во многих случаях наиболее мощным и гибким способом взаимодействия с компьютером является интерфейс командной строки (CLI).
@@ -244,6 +244,126 @@ alias cp='cp -i'
 The **prompt** (to “prompt – побудить к действию, подсказка” the user to do something) followed by a **command** (as in “give the computer a command”), an **option** (as in “choose a different option”), and an **argument** (as in the “argument of a function” in mathematics).  prompt выдается терминалом автоматически, и вам не нужно его набирать
 
 <img alt="image" src="images/2.png"> </img> 
+
+---
+Каждая командная строка начинается с некоторого символа или символов, призванных «побудить – prompt» вас к действию. Запрос обычно заканчивается знаком доллара `$` или знаком процента `%`, и ему предшествует информация, которая зависит от особенностей вашей системы.
+
+Новая вкладка tab -> `command + T`
+ 
+Новое окно `command + N`
+
+Команда `echo [Печать текста]`, похожа на `print()`
+
+```bash
+$ echo hello, goodbye
+hello, goodbye
+$ echo "hello, goodbye"
+hello, goodbye
+```
+
+Чтобы выбрать предыдущую введенную команду и выбирать из них используем стрелочки `вверх` и `вниз` 
+
+Если компанда длинная и нам нужно что-то отредактировать в ней, мы можем двигать курсор ввода стрелочками вправо/влево, или зажать `Alt/Option` и явно кликнуть на нужное место курсором. Или использовать клавиатуру и ввести команду `Control + A` возвращающую курсор в начало строки и команду `Control + E` возвращающую курсор в конец строки
+
+Команда `Control + U` очистит введенную команду без ее выполнения
+
+Команда `clear` or `control + L` очищает весь экран терминала 
+Команда `exit` or `control + D` команда выхода, окончания компиляции
+
+Если мы ввели неверно команду, или терминал завис, нажимаем `control + C` или `ctrl + C` или `ESC (escape)`. Вот примеры, когда терминал зависнет (команды с ошибками или пустые)
+
+```bash
+$ echo "hello
+$ grep foobar
+$ yes
+$ tail
+$ cat
+```
+
+Чтобы узнать больше информации о команде `man [command name]`
+Чтобы выйти из справочного окна нажимаем клавишу `q`
+
+```bash
+$ man echo
+```
+
+Команда `man man` даем инфо о самой команде
+```bash
+$ man man
+man(1)                                 man(1)
+NAME
+    man - format and display the on-line manual pages
+```
+
+Можно разделить строку с помощью символа `\n`
+ 
+Команда сон `sleep [seconds]`
+
+---
+### Redirecting and appending
+Our task now is to create a file containing this line, it is possible to do this using the redirect operator ` > `
+
+```bash
+$ echo "From fairest creatures we desire increase," > sonnet_1.txt
+```
+
+Команда `cat [Name file]` выводит содержимое файла на экран:
+
+```bash
+$ cat sonnet_1.txt
+From fairest creatures we desire increase,
+```
+Название `cat` является сокращением от `concatenate`, что является намеком на то, что его можно использовать для объединения содержимого нескольких файлов, но использование выше, как для вывода содержимого одного файла на экран чрезвычайно распространено. Думайте о `cat` как о «быстром и грязном» способе просмотра содержимого определенного файла
+
+Чтобы добавить строку мы можем использовать оператор добавления append operator ` >> ` следующим образом
+
+```bash
+$ echo "That thereby beauty's Rose might never die," >> sonnet_1.txt
+```
+
+---
+Чтобы облегчить сравнение похожих, но не идентичных файлов, есть команда `diff`.
+
+Она часто используется как: «Какая разница между этими файлами?», и «Вы должны сравнить файлы, чтобы увидеть, что изменилось». Когда между двумя файлами нет различий, `diff` просто ничего не выводит
+
+```bash
+$ diff sonnet_1.txt sonnet_1_lower_case.txt
+< That thereby beauty's Rose might never die,
+---
+> That thereby beauty's rose might never die,
+```
+
+Можно содержимое одного файла добавить в другой файл, добавится вниз
+
+```bash
+flyboroda@MacBook-Air-Artem Swift learn % cat sonnet_1.txt
+  From fairest creatures we desire increase,
+  That thereby beauty's Rose might never die,
+flyboroda@MacBook-Air-Artem Swift learn % cat sonnet_1.txt >> sonnet_1_lower_case.txt
+flyboroda@MacBook-Air-Artem Swift learn % cat sonnet_1_lower_case.txt 
+  From fairest creatures we desire increase,
+  That thereby beauty's rose might never die,
+   From fairest creatures we desire increase,
+   That thereby beauty's Rose might never die,
+```
+
+Можно содержание двух файлов объединить и добавить в новый  файл `sonnet1.txt` . Команда `cat` может принимать несколько аргументов
+
+```bash
+flyboroda@MacBook-Air-Artem Swift learn % cat sonnet_1.txt sonnet_1_lower_case.txt >> sonnet1.txt
+```
+
+---
+### Listing
+Команда `ls` просто выводит список всех файлов и каталогов в текущей директории
+
+`ls -a` Список файлов и папок в текущей директории с учётом скрытых файлов и папок
+
+
+
+
+
+
 
 
 
