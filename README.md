@@ -249,7 +249,7 @@ The **prompt** (to “prompt – побудить к действию, подс�
 Каждая командная строка начинается с некоторого символа или символов, призванных «побудить – prompt» вас к действию. Запрос обычно заканчивается знаком доллара `$` или знаком процента `%`, и ему предшествует информация, которая зависит от особенностей вашей системы.
 
 Новая вкладка tab -> `command + T`
- 
+
 Новое окно `command + N`
 
 Команда `echo [Печать текста]`, похожа на `print()`
@@ -296,7 +296,7 @@ NAME
 ```
 
 Можно разделить строку с помощью символа `\n`
- 
+
 Команда сон `sleep [seconds]`
 
 ---
@@ -358,6 +358,163 @@ flyboroda@MacBook-Air-Artem Swift learn % cat sonnet_1.txt sonnet_1_lower_case.t
 Команда `ls` просто выводит список всех файлов и каталогов в текущей директории
 
 `ls -a` Список файлов и папок в текущей директории с учётом скрытых файлов и папок
+
+<img alt="image" src="images/3.png"> </img>
+
+Одной из полезных возможностей `ls` является поддержка подстановочного знака ` * `. Например, чтобы перечислить все файлы, оканчивающиеся на `.txt`
+
+Автоматически заменяется на все имена файлов, которые соответствуют шаблону `любая строка, за которой следует .txt`
+
+```bash
+flyboroda@MacBook-Air-Artem zsh % ls *.txt
+Plan.txt		sonnet_1.txt
+sonnet1.txt		sonnet_1_lower_case.txt
+```
+
+В длинной форме `ls -l [name file]` or `ls -l *[name format]`  указаны дата и время, указывающие время последнего изменения файла. Число перед датой – это размер файла в байтах
+
+```bash
+flyboroda@MacBook-Air-Artem zsh % ls -l  *.txt
+-rw-r--r--@ 1 flyboroda  staff  816 27 дек 12:23 Plan.txt
+-rw-r--r--@ 1 flyboroda  staff  348 15 янв 13:29 sonnet1.txt
+-rw-r--r--@ 1 flyboroda  staff   87 15 янв 12:58 sonnet_1.txt
+-rw-r--r--@ 1 flyboroda  staff  261 15 янв 13:12 sonnet_1_lower_case.txt
+flyboroda@MacBook-Air-Artem zsh % ls -l Plan.txt
+-rw-r--r--@ 1 flyboroda  staff  816 27 дек 12:23 Plan.txt
+
+flyboroda@MacBook-Air-Artem zsh % ls -l sonnet* 
+-rw-r--r--@ 1 flyboroda  staff  348 15 янв 13:29 sonnet1.txt
+-rw-r--r--@ 1 flyboroda  staff   87 15 янв 12:58 sonnet_1.txt
+-rw-r--r--@ 1 flyboroda  staff  261 15 янв 13:12 sonnet_1_lower_case.txt
+
+flyboroda@MacBook-Air-Artem zsh % ls -l s*
+-rw-r--r--@ 1 flyboroda  staff  348 15 янв 13:29 sonnet1.txt
+-rw-r--r--@ 1 flyboroda  staff   87 15 янв 12:58 sonnet_1.txt
+-rw-r--r--@ 1 flyboroda  staff  261 15 янв 13:12 sonnet_1_lower_case.txt
+```
+
+`ls -rtl` «список по обратному времени модификации (длинный формат)», который перечисляет длинную форму каждого файла или каталога в порядке того, как недавно они были изменены (обратно, так что самые последние измененные записи появляются в нижней части экрана для удобства просмотра).
+Кроме того, их порядок не имеет значения, поэтому ввод `ls -trl` дает тот же результат. Можно и так `-r -t -l`
+
+```bash
+flyboroda@MacBook-Air-Artem zsh % ls -rtl
+total 32
+-rw-r--r--@ 1 flyboroda  staff  816 27 дек 12:23 Plan.txt
+-rw-r--r--@ 1 flyboroda  staff   87 15 янв 12:58 sonnet_1.txt
+-rw-r--r--@ 1 flyboroda  staff  261 15 янв 13:12 sonnet_1_lower_case.txt
+-rw-r--r--@ 1 flyboroda  staff  348 15 янв 13:29 sonnet1.txt
+-rw-r--r--  1 flyboroda  staff    0 15 янв 14:31 foo
+flyboroda@MacBook-Air-Artem zsh % ls -r -l -t Plan.txt 
+-rw-r--r--@ 1 flyboroda  staff  816 27 дек 12:23 Plan.txt
+```
+
+Создадим новую папку и в ней файл Text.txt
+`mkdir .Secrets` Создать скрытую директорию
+`mkdir Secrets` Создать директорию
+Команда для создания файла `touch [Name file]`
+<img alt="image" src="images/4.png"> </img>
+
+---
+### Hidden files
+Hidden files (and directories), which don’t show up by default when listing files. Hidden files and directories are identified by starting with a dot  ` . `  
+Создадим файл с именем  `.gitignore`, который сообщает определенной программе (Git) игнорировать файлы, соответствующие определенным шаблонам. В качестве конкретного примера, чтобы игнорировать все файлы, оканчивающиеся на `.txt`, мы могли бы сделать это:
+
+```bash
+$ echo "*.txt" > .gitignore
+$ cat .gitignore
+*.txt
+```
+
+If we then run ls, the file won’t show up, because it’s hidden:
+
+```bash
+$ ls
+sonnet_1.txt
+sonnet_1_reversed.txt
+```
+To get ls to display hidden files and directories, we need to pass it the ` -a ` option (for “all”):
+
+```bash
+$ ls -a
+.           .gitignore      sonnet_1_reversed.txt
+..          sonnet_1.txt
+Now .gitignore shows up, as expected.
+```
+
+Выведем все файлы, в том числе скрытые, по времени изменения с информацией
+
+```bash
+flyboroda@MacBook-Air-Artem zsh % ls -rtl -a
+total 40
+-rw-r--r--@  1 flyboroda  staff  816 27 дек 12:23 Plan.txt
+-rw-r--r--@  1 flyboroda  staff   87 15 янв 12:58 sonnet_1.txt
+-rw-r--r--@  1 flyboroda  staff  261 15 янв 13:12 sonnet_1_lower_case.txt
+-rw-r--r--@  1 flyboroda  staff  348 15 янв 13:29 sonnet1.txt
+-rw-r--r--   1 flyboroda  staff    0 15 янв 14:31 foo
+drwxr-xr-x@ 17 flyboroda  staff  544 15 янв 14:32 ..
+drwxr-xr-x@  8 flyboroda  staff  256 16 янв 21:32 .
+-rw-r--r--   1 flyboroda  staff    7 16 янв 21:32 .gitignore
+```
+
+---
+### Renaming, copying, deleting
+The way to rename a file is with the `mv` command, short for “move”:
+
+```bash
+$ echo "test text" > test.txt
+$ mv test.txt test_file.txt
+$ ls
+test_file.txt
+```
+
+The way to copy a file is with `cp`, short for “copy”, первый идет источник копирования, затем новый файл который будет создан путем копирования исходного
+
+```bash
+$ cp test_file.txt second_test.txt
+$ ls
+second_test.txt
+test_file.txt
+```
+
+Finally, the command for deleting a file is `rm`, for “remove”:
+
+```bash
+$ rm second_test.txt
+remove second_test.txt? y
+$ ls second_test.txt
+ls: second_test.txt: No such file or directory
+```
+
+Удалить файл (remove) rm second_test.txt удалится, минуя корзину
+For example, to remove all the files ending with `.txt` using a single command, without having to confirm each one, you can type this:
+Удалить все файлы в папке ` rm * `
+
+```bash
+$ rm *
+```
+
+Here ` -f ` (for “force”) overrides the implicit `-i` option and removes all files immediately
+
+```bash
+$ rm -f *.txt
+```
+
+Или удалить лишь выборочно по выборке имени с помощью `*`
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % ls
+Plan.txt		one.txt			sonnet_1_lower_case.txt
+foo			sonnet1.txt		two.txt
+flyboroda@MacBook-Air-Artem MyFolder % rm sonnet*
+flyboroda@MacBook-Air-Artem MyFolder % ls
+Plan.txt	foo		one.txt		two.txt
+```
+
+
+
+
+
+
 
 
 
