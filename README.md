@@ -686,7 +686,7 @@ flyboroda@MacBook-Air-Artem MyFolder % grep -i rose sonnets.txt | wc
       12      96     508
 ```
 Мы видим, что теперь у нас есть 12 совпадающих строк вместо всего 10, поэтому в Сонетах должно быть всего 12 − 10 = 2 строки, содержащие “Rose” (но не “rose”).
-  
+
 Одним из многих применений `grep` является фильтрация `process list` списка процессов Unix для запуска программ, соответствующих определенной строке. (В Unix-подобных системах, таких как Linux и OS X, пользовательские и системные задачи выполняются в четко определенном контейнере, называемом процессом – `process`.) Это особенно полезно, когда в вашей системе есть вредоносный процесс, который необходимо уничтожить. (Хороший способ найти такие процессы – запустить команду `top`, которая показывает процессы, потребляющие наибольшее количество ресурсов.)
 
 Например, в какой-то момент в учебнике по Ruby on Rails важно исключить программу под названием `spring` из списка процессов. Для этого сначала необходимо найти процессы, и способ просмотреть все процессы в вашей системе – использовать команду `ps` с опциями `aux`:
@@ -714,6 +714,129 @@ $ kill -15 12241
 ```bash
 $ pkill -15 -f spring
 ```
+
+В любое время, когда что-то ведет себя не так, как ожидалось, или процесс, похоже, заморожен, рекомендуется запустить `top` или `ps aux`, чтобы посмотреть, что происходит, пропустить `ps aux` через `grep to select` подозрительные процессы, а затем выполнить `kill -15 <pid>` or `pkill -15 -f <name>` чтобы выяснить, что происходит.
+
+Выполнив поиск в `man grep` для `-n, --номер строки`, создал команду для поиска номеров строк в `sonnets.txt` где появляется строка “rose”. Каждой выходной строке предшествует ее относительный номер строки в файле, начиная со строки 1. Счетчик номеров строк выставляется для каждого обработанного файла. `grep -ni`
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % grep -ni rose sonnets.txt
+6:That thereby beauty's Rose might never die,
+585:Roses have thorns, and silver fountains mud:
+909:The rose looks fair, but fairer we it deem
+912:As the perfumed tincture of the roses.
+```
+Напишите команду, подтверждающую, что количество строк, совпадающих с “Rose”, но не совпадающих с “rose”, равно ожидаемому 2. Подсказка: Передайте результат `grep` в `grep -v`, а затем передайте этот результат в `wc`. Что делает `-v`? Она исключает из поиска выбранный элемент в нашем случае “rose”
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % grep -n Rose sonnets.txt | grep -v rose | wc
+       2      14      95
+flyboroda@MacBook-Air-Artem MyFolder % grep -n rose sonnets.txt | grep -v Rose | wc
+       9      75     420
+flyboroda@MacBook-Air-Artem MyFolder % grep -i rose sonnets.txt | wc        
+      12      97     561
+flyboroda@MacBook-Air-Artem MyFolder % grep rose sonnets.txt | wc 
+      10      82     419
+```
+Это связано с тем, что есть одна строка, которая содержит как “Rose”, так и “rose”, и, таким образом, отображается как в `grep rose`, так и в `grep -i rose`
+
+The history command prints the `history` of commands in a particular terminal shall (subject to some limit, which is typically large)
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % history
+```
+Одним из способов использования `history grep` является поиск наших команд, чтобы найти полезные, которые вы использовали ранее, причем каждой команде предшествует соответствующий номер в истории команд. Передавая вывод `history` в `grep`, определите номер для нужной команды. 
+
+Мы узнали о `!!` для выполнения предыдущей команды. Аналогично, `!n` выполняет команду под номером `n`
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % history | grep curl
+665  curl -OL http://cc.iiti.ac.in/docs/linuxcommands.pdf
+flyboroda@MacBook-Air-Artem MyFolder % !665
+curl -O https://cdn.learnenough.com/sonnets.txt
+```
+
+---
+### Directories или Каталоги, или  Папки
+The structure каталогов в стиле Unix обычно представляет собой список имен каталогов, разделенных косой чертой, например
+
+<img alt="image" src="images/6.png"> </img>
+
+В дополнение к каталогам пользователей, в каждой системе Unix есть системные каталоги для программ, необходимых для нормальной работы компьютера. Для изменения системных файлов или каталогов требуются специальные полномочия, предоставляемые только superuser суперпользователю, известному как `root`. Суперпользователь настолько силен, что входить в систему от имени `root` считается дурным тоном; вместо этого задачи, выполняемые от имени `root`, обычно должны использовать команду `sudo`, она дает обычным пользователям возможность выполнять команды от имени суперпользователя.
+
+Например, давайте попробуем создать файл в системном каталоге `/opt` следующим образом: 
+
+```bash
+$ touch /opt/foo
+touch: /opt/foo: Permission denied
+```
+Разрешение отклонено
+Поскольку у обычных пользователей нет разрешения на изменение, но выполняется успешно с помощью `sudo`:
+
+```bash
+$ sudo sudo touch /opt/foo 
+```
+Как показано, после ввода `sudo` нам будет предложено ввести наш пароль пользователя; если он введен правильно и если пользователь настроен на получение привилегий `sudo` (что по умолчанию используется в большинстве настольных систем Unix), то команда будет выполнена успешно. 
+Чтобы проверить, действительно ли файл был создан, мы можем `ls`:
+
+```bash
+$ ls -l /opt/foo
+ -rw-r--r-- 1 root wheel 0 Jul 23 19:13 /opt/foo
+```
+Обратите внимание, что (1) обычный пользователь может открыть файл в системном каталоге (без `sudo`) и (2) в списке отображается имя `root`, указывающее, что файл принадлежит суперпользователю. (Значение второго термина, колесо, немного неясно, но вы можете узнать об этом на сайте, который, как и следовало ожидать, называется "суперпользователь".)
+https://superuser.com/questions/191955/what-is-the-wheel-user-in-os-x 
+Чтобы удалить файл, который мы только что создали, нам снова нужен статус суперпользователя:
+
+```bash
+$ rm -f /opt/foo
+rm: /opt/foo: Permission denied
+$ sudo !!
+$ !ls
+ls: /opt/foo: No such file or directory
+```
+Здесь первый `rm` терпит неудачу, поэтому мы запустили `sudo !!`, который запускает `sudo`, а затем предыдущую команду, и мы последовали за этим с помощью `!ls`, который запускает предыдущую команду `ls`
+
+---
+### Making directories 
+Наконец-то пришло время создать каталог. Unix-способ сделать это с помощью `mkdir` (сокращение от “создать каталог”):
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % mkdir newfolder
+```
+Создав каталог, мы можем переместить туда текстовые файлы, используя подстановочный знак:
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % mv *.txt newfolder 
+```
+Мы можем подтвердить, что перемещение удалось, перечислив каталог:
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % ls 
+Linux_bash_cheat_sheet-1.pdf	newfolder
+learnenough.log			world.docx
+flyboroda@MacBook-Air-Artem MyFolder % ls newfolder 
+newfile1.txt	newfile2.txt	newfile3.txt	newfile4.txt	sonnets.txt
+```
+
+ Finally, we can change directories using `cd`: 
+ 
+```bash
+    flyboroda@MacBook-Air-Artem MyFolder % cd newfolder
+    flyboroda@MacBook-Air-Artem newfolder %
+```
+После запуска `cd` мы можем подтвердить, что находимся в правильном каталоге, используя команду “печать рабочего каталога”, `pwd`
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % pwd
+/Users/flyboroda/Documents/Swift learn/MyFolder
+```
+
+---
+
+
+
+
+
 
 
 
