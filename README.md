@@ -819,10 +819,10 @@ newfile1.txt	newfile2.txt	newfile3.txt	newfile4.txt	sonnets.txt
 ```
 
  Finally, we can change directories using `cd`: 
- 
+
 ```bash
-    flyboroda@MacBook-Air-Artem MyFolder % cd newfolder
-    flyboroda@MacBook-Air-Artem newfolder %
+flyboroda@MacBook-Air-Artem MyFolder % cd newfolder
+flyboroda@MacBook-Air-Artem newfolder %
 ```
 После запуска `cd` мы можем подтвердить, что находимся в правильном каталоге, используя команду “печать рабочего каталога”, `pwd`
 
@@ -832,8 +832,100 @@ flyboroda@MacBook-Air-Artem MyFolder % pwd
 ```
 
 ---
+### Navigating directories 
+Есть несколько специальных форм, которые стоит знать. Первый - это переход в каталог на один уровень выше в иерархии с помощью `cd..`
 
+```bash
+flyboroda@MacBook-Air-Artem newfolder % pwd
+/Users/flyboroda/Documents/Swift learn/MyFolder/newfolder
+flyboroda@MacBook-Air-Artem newfolder % cd ..
+flyboroda@MacBook-Air-Artem MyFolder % pwd
+/Users/flyboroda/Documents/Swift learn/MyFolder
+```
 
+This is a return to the home directory
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % cd
+
+flyboroda@MacBook-Air-Artem MyFolder % cd ~
+flyboroda@MacBook-Air-Artem ~ % pwd
+     /Users/flyboroda
+```
+In this case, because `/Users/flyboroda` is my home directory. Можно вернуться в домашний каталог `cd` and `cd ~`
+
+`cd` - Переместиться в домашнюю директорию
+`cd [folder]` Сменить директорию. Например `cd Documents`
+
+Terminal помогает нам, если ввести Do и нажать `tab` making use of tab completion он сам закончит название папки, или предложит варианты. Таким образом можем перемещаться по папкам, и погружаться на уровни ниже. 
+
+Можно перетащить нужную папку в поле ввода терминала
+
+Мы можем опуститься/вернуться назад на уровень ниже `cd ..`
+
+При перемещении или копировании файлов в текущий каталог:
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % cp newfile1.txt
+  ~/Documents/Swift\ learn/MyFolder/newfolder
+flyboroda@MacBook-Air-Artem MyFolder % cd newfolder
+flyboroda@MacBook-Air-Artem newfolder % ls
+  newfile1.txt
+```
+
+Еще одно распространенное применение ` . ` (точка указывает на текущий каталог, и данная команда показывает в том числе и скрытые файлы) работает в сочетании с командой `find`, которая, как и `grep`, безумно мощна, в данном случае сортировка по формату файлов это позволяет находить файлы, имена которых соответствуют шаблону ` *.txt `, начиная с текущего каталога ` . ` а затем в его подкаталогах.
+
+```bash
+flyboroda@MacBook-Air-Artem MyFolder % find . -name '*.docx'
+  ./world.docx
+```
+
+Можно открыть файл программой по умолчанию `open [Name file]`
+
+```bash
+flyboroda@MacBook-Air-Artem newfolder % open newfile1.txt 
+```
+
+Можно выбрать программу для открытия `open -a [Name app] [Name file]`
+
+```bash
+flyboroda@MacBook-Air-Artem newfolder % open -a Xcode   newfile1.txt
+```
+
+Команда `cd -`, вернет пользователя в предыдущий каталог
+
+```bash
+flyboroda@MacBook-Air-Artem newfolder % cd -
+  ~/Documents/Swift learn/MyFolder
+```
+
+Объединяя команды, мы можем сортировать файлы (из-за неверных кавычек может не сработать) `find` and `grep`
+
+```bash
+flyboroda@MacBook-Air-Artem newfolder % find . -name '*.txt' | grep new    
+./newfile4.txt
+./newfile1.txt
+./newfile3.txt
+./newfile2.txt
+flyboroda@MacBook-Air-Artem newfolder % find . -name '*.txt' | grep son
+./sonnets.txt
+```
+
+Часто бывает удобно комбинировать команды в командной строке, которые часто отображаются в следующей последовательности:
+
+```bash
+flyboroda@MacBook-Air-Artem newfolder % command ; command ; command ; command
+```
+Поскольку они разделены символом точки с запятой ` ; ` три команды выполняются последовательно.
+
+Еще лучший способ комбинировать команды – использовать двойной амперсанд `&&`
+
+```bash
+flyboroda@MacBook-Air-Artem newfolder % command && command && command && command
+```
+Разница в том, что команды, разделенные символом `&&`, выполняются только в том случае, если предыдущая команда выполнена успешно. В отличие от `;` все команды будут выполняться независимо ни от чего, что приведет к ошибке в вероятном случае, когда последующие команды зависят от результатов тех, которые им предшествуют.
+
+---
 
 
 
