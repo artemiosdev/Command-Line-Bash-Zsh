@@ -1,5 +1,8 @@
 # The Command Line and Terminal
 
+## <a id="contents" />Оглавление
+
+
 ### Часто используемые команды в терминале Mac
 
 ### Горячие клавиши
@@ -143,7 +146,8 @@ Bash можно установить с помощью инструмента у
 
 ---
 ---
-### Using Z Shell  #zsh on Macs with the Learn Enough Tutorials
+[К оглавлению](#contents)
+## Using Z Shell or Bash on Macs
  https://news.learnenough.com/macos-bash-zshell 
 
 Как сменить оболочки с `zsh` on `bash`? How to change shells
@@ -300,7 +304,8 @@ NAME
 Команда сон `sleep [seconds]`
 
 ---
-### Redirecting and appending
+[К оглавлению](#contents)
+## Redirecting and appending
 Our task now is to create a file containing this line, it is possible to do this using the redirect operator ` > `
 
 ```bash
@@ -354,7 +359,8 @@ flyboroda@MacBook-Air-Artem Swift learn % cat sonnet_1.txt sonnet_1_lower_case.t
 ```
 
 ---
-### Listing
+[К оглавлению](#contents)
+## Listing
 Команда `ls` просто выводит список всех файлов и каталогов в текущей директории
 
 `ls -a` Список файлов и папок в текущей директории с учётом скрытых файлов и папок
@@ -415,7 +421,8 @@ flyboroda@MacBook-Air-Artem zsh % ls -r -l -t Plan.txt
 <img alt="image" src="images/4.png"> </img>
 
 ---
-### Hidden files
+[К оглавлению](#contents)
+## Hidden files
 Hidden files (and directories), which don’t show up by default when listing files. Hidden files and directories are identified by starting with a dot  ` . `  
 Создадим файл с именем  `.gitignore`, который сообщает определенной программе (Git) игнорировать файлы, соответствующие определенным шаблонам. В качестве конкретного примера, чтобы игнорировать все файлы, оканчивающиеся на `.txt`, мы могли бы сделать это:
 
@@ -457,7 +464,8 @@ drwxr-xr-x@  8 flyboroda  staff  256 16 янв 21:32 .
 ```
 
 ---
-### Renaming, copying, deleting
+[К оглавлению](#contents)
+## Renaming, copying, deleting
 The way to rename a file is with the `mv` command, short for “move”:
 
 ```bash
@@ -533,7 +541,8 @@ hello, world
 ```
 
 ---
-### Inspecting (просмотр) files 
+[К оглавлению](#contents)
+## Inspecting (просмотр) files 
 Мы можем загрузить файл из Интернета с помощью мощной утилиты `curl`, которая позволяет нам взаимодействовать с URL-адресами в командной строке. Команда `curl` широко доступна в системах Unix. Чтобы убедиться, что она доступна в вашей системе, мы можем использовать команду `which`, которая проверяет, доступна ли данная программа в командной строке. 
 
 Способ его использования состоит в том, чтобы ввести, за `which` следует название программы — в данном случае `curl`:
@@ -595,7 +604,8 @@ flyboroda@MacBook-Air-Artem MyFolder % tail sonnets.txt
 Эти две команды полезны, когда вы точно знаете, что вам нужно проверить только начало или конец файла.
 
 ---
-### Количество строк/слов/байтов
+[К оглавлению](#contents)
+## Количество строк/слов/байтов
 Команда `wc` (сокращение от “количество слов). Наиболее часто `wc` используется для полных файлов. Например, мы можем запустить `sonnets.txt` через `wc`:
 
 ```bash
@@ -629,7 +639,8 @@ Hello, Instagram
 ```
 
 ---
-### Less is more 
+[К оглавлению](#contents)
+## Less is more 
 Unix предоставляет две утилиты для обычного случая, когда требуется просмотреть больше, чем просто начало или конец файла. Более старая из этих программ называется `more`, есть более мощный вариант под названием `less`. Программа `less` интерактивна, поэтому ее трудно запечатлеть в печати, но вот примерно, как она выглядит:
 
 ```bash
@@ -648,7 +659,8 @@ flyboroda@MacBook-Air-Artem MyFolder % more sonnets.txt
 Последние две основные команды `less` – это `G` для перехода к началу файла и `Shift + G` для возврата к концу.
 
 ---
-### Grepping (захватывающий)
+[К оглавлению](#contents)
+## Grepping (захватывающий)
 Одним из самых мощных инструментов для проверки содержимого файлов является `grep`
 
 Наиболее распространенное использование `grep` – это просто поиск подстроки в файле. Например, как использовать `less` для поиска строки “rose” в файле `sonnets.txt`. Используя `grep`, мы можем найти ссылки напрямую
@@ -757,7 +769,8 @@ curl -O https://cdn.learnenough.com/sonnets.txt
 ```
 
 ---
-### Directories или Каталоги, или  Папки
+[К оглавлению](#contents)
+## Directories или Каталоги, или  Папки
 The structure каталогов в стиле Unix обычно представляет собой список имен каталогов, разделенных косой чертой, например
 
 <img alt="image" src="images/6.png"> </img>
@@ -797,7 +810,8 @@ ls: /opt/foo: No such file or directory
 Здесь первый `rm` терпит неудачу, поэтому мы запустили `sudo !!`, который запускает `sudo`, а затем предыдущую команду, и мы последовали за этим с помощью `!ls`, который запускает предыдущую команду `ls`
 
 ---
-### Making directories 
+[К оглавлению](#contents)
+## Making directories 
 Наконец-то пришло время создать каталог. Unix-способ сделать это с помощью `mkdir` (сокращение от “создать каталог”):
 
 ```bash
@@ -832,7 +846,8 @@ flyboroda@MacBook-Air-Artem MyFolder % pwd
 ```
 
 ---
-### Navigating directories 
+[К оглавлению](#contents)
+## Navigating directories 
 Есть несколько специальных форм, которые стоит знать. Первый - это переход в каталог на один уровень выше в иерархии с помощью `cd..`
 
 ```bash
@@ -926,7 +941,8 @@ flyboroda@MacBook-Air-Artem newfolder % command && command && command && command
 Разница в том, что команды, разделенные символом `&&`, выполняются только в том случае, если предыдущая команда выполнена успешно. В отличие от `;` все команды будут выполняться независимо ни от чего, что приведет к ошибке в вероятном случае, когда последующие команды зависят от результатов тех, которые им предшествуют.
 
 ---
-### Renaming, copying, and deleting directories 
+[К оглавлению](#contents)
+## Renaming, copying, and deleting directories 
 Команды для переименования, копирования и удаления каталогов аналогичны командам для файлов. Здесь сообщение об ошибке указывает на то, что `mv` сработал: нет файла или каталога с именем "folder". 
 
 Единственная незначительная тонкость заключается в том, что конечные косые черты (которые обычно добавляются автоматически при заполнении вкладки являются необязательными
@@ -946,7 +962,7 @@ flyboroda@MacBook-Air-Artem newfolder % command && command && command && command
    flyboroda@MacBook-Air-Artem folder % cp -r  ../newfolder .
    flyboroda@MacBook-Air-Artem folder % ls
      newfolder
-```                             
+```
 Обратите внимание, что мы использовали ` .. ` для создания относительного пути, поднимаясь по одному каталогу, а затем в "`newfolder`".
 
 Здесь копируются только файлы, но не сам каталог (все дело в `/` в конце)
@@ -967,7 +983,8 @@ flyboroda@MacBook-Air-Artem MyFolder % rm -rf folder
 ```
 
 ---
-### Grep redux    
+[К оглавлению](#contents)
+## Grep redux    
 Как и в случае `cp` и `rm`, `grep` использует “рекурсивную” опцию `-r`, которая в этом случае просматривает файлы каталога и файлы в его подкаталогах. Это невероятно полезно, когда вы ищете строку в файле где-то в иерархии каталогов, но вы не уверены, где находится файл
 
 Предположим, что теперь мы хотим найти файл, содержащий “quantum”, добавление `-r` делает свое дело:
