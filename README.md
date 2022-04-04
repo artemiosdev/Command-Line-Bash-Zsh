@@ -798,7 +798,7 @@ curl -O https://cdn.learnenough.com/sonnets.txt
 
 ---
 [К оглавлению](#contents)
-## <a id="chapter10" />Directories или Каталоги, или  Папки
+## <a id="chapter10" />Directories (Каталоги/Папки)
 The structure каталогов в стиле Unix обычно представляет собой список имен каталогов, разделенных косой чертой, например
 
 <img alt="image" src="images/6.png"> </img>
